@@ -64,7 +64,7 @@ export const Menu = ({ isOpen, options, onClose }: MenuProps) => {
       translateY.value = event.translationY;
     })
     .onFinalize(() => {
-      if (translateY.value > 100) {
+      if (translateY.value > 75) {
         runOnJS(handleHide)();
       } else {
         runOnJS(handleShow)();
