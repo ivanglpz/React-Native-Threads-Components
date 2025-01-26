@@ -10,62 +10,34 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <View style={styles.section}>
+        <Text>React Native Menu Options</Text>
 
-      <TouchableOpacity
-        onPress={() => {
-          setshowMenu(true);
-        }}
-        style={{
-          backgroundColor: "#222222",
-          padding: 12,
-        }}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontWeight: "bold",
+        <TouchableOpacity
+          onPress={() => {
+            setshowMenu(true);
           }}
+          style={styles.button}
         >
-          Open menu
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          setshowMenu2(true);
-        }}
-        style={{
-          backgroundColor: "#222222",
-          padding: 12,
-        }}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontWeight: "bold",
+          <Text style={styles.button_text}>Open menu</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setshowMenu2(true);
           }}
+          style={styles.button}
         >
-          Open menu 2
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          setshowMenu3(true);
-        }}
-        style={{
-          backgroundColor: "#222222",
-          padding: 12,
-        }}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontWeight: "bold",
+          <Text style={styles.button_text}>Open menu 2</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setshowMenu3(true);
           }}
+          style={styles.button}
         >
-          Open menu 3
-        </Text>
-      </TouchableOpacity>
+          <Text style={styles.button_text}>Open menu 3</Text>
+        </TouchableOpacity>
+      </View>
       <Menu
         isOpen={showMenu2}
         onClose={() => {
@@ -164,5 +136,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  section: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 4,
+  },
+  button: {
+    backgroundColor: "#222222",
+    padding: 12,
+    borderRadius: 8,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  button_text: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
