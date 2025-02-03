@@ -1,5 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Dimensions,
   Modal,
@@ -32,12 +32,10 @@ type MenuProps = {
   onClose: VoidFunction;
 };
 
-const gap = 12;
-const padding = 15;
-const borderRadius = 20;
 const { height: screenHeight } = Dimensions.get("window");
 
 export const Menu = ({ isOpen, options, onClose }: MenuProps) => {
+  const [show, setShow] = useState(false);
   const data: MenuOption[][] = options?.every((e) => Array.isArray(e))
     ? options
     : [options as MenuOption[]];
@@ -51,9 +49,10 @@ export const Menu = ({ isOpen, options, onClose }: MenuProps) => {
     translateY.value = withTiming(0, { duration: 300 });
   };
 
-  const handleHide = () => {
+  const handleClose = () => {
     translateY.value = withTiming(screenHeight, { duration: 300 }, () => {
       runOnJS(onClose)();
+      runOnJS(setShow)(false);
     });
   };
 
@@ -65,27 +64,39 @@ export const Menu = ({ isOpen, options, onClose }: MenuProps) => {
     })
     .onFinalize(() => {
       if (translateY.value > 75) {
-        runOnJS(handleHide)();
+        runOnJS(handleClose)();
       } else {
         runOnJS(handleShow)();
       }
     });
+
   useEffect(() => {
-    isOpen ? handleShow() : handleHide();
+    if (show) {
+      handleShow();
+      return;
+    }
+  }, [show]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShow(true);
+      return;
+    }
+    handleClose();
   }, [isOpen]);
 
   return (
-    <Modal visible={isOpen} transparent animationType="fade">
-      <SafeAreaView style={{ flex: 1 }}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+    <Modal visible={show} transparent animationType="fade">
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }}>
           <View style={styles.bg}>
             <Animated.View style={[styles.container, animatedStyle]}>
               <GestureDetector gesture={tap}>
-                <Animated.View style={styles.bar_container}>
-                  <Animated.View style={styles.bar}></Animated.View>
-                </Animated.View>
+                <View style={styles.bar_container}>
+                  <View style={styles.bar}></View>
+                </View>
               </GestureDetector>
-              <View style={{ padding: padding, gap: gap }}>
+              <View style={styles.container_list}>
                 {data?.map((e, MainIndex) => {
                   return (
                     <View key={`menu_option_${MainIndex}`}>
@@ -133,8 +144,8 @@ export const Menu = ({ isOpen, options, onClose }: MenuProps) => {
               </View>
             </Animated.View>
           </View>
-        </GestureHandlerRootView>
-      </SafeAreaView>
+        </SafeAreaView>
+      </GestureHandlerRootView>
     </Modal>
   );
 };
@@ -146,19 +157,27 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
+    width: "100%",
+    height: "100%",
   },
   container: {
     backgroundColor: "#222222",
-    minHeight: 100,
-    borderTopRightRadius: borderRadius,
-    borderTopLeftRadius: borderRadius,
-    paddingBottom: padding,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    width: "100%",
   },
   bar_container: {
-    height: 30,
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
+    padding: 15,
+  },
+  container_list: {
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+    gap: 12,
+    display: "flex",
+    flexDirection: "column",
   },
   bar: {
     backgroundColor: "#3B3E3D",
@@ -171,16 +190,16 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   borderTopRadius: {
-    borderTopRightRadius: borderRadius,
-    borderTopLeftRadius: borderRadius,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
   },
   borderBottomRadius: {
-    borderBottomRightRadius: borderRadius,
-    borderBottomLeftRadius: borderRadius,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
   option: {
     backgroundColor: "#292929",
-    padding: padding,
+    padding: 15,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
