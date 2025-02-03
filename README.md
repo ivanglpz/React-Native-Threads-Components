@@ -1,4 +1,4 @@
-![Texto alternativo](https://res.cloudinary.com/whil/image/upload/v1738554439/projects/rn_threads_assets/bi_threads-fill_adyccv.png)
+![Texto alternativo](https://res.cloudinary.com/whil/image/upload/v1738554533/projects/rn_threads_assets/bi_threads-fill_fswbmb.png)
 
 # React native threads menu
 
