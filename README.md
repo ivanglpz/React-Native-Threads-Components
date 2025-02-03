@@ -1,6 +1,6 @@
 ![Texto alternativo](https://res.cloudinary.com/whil/image/upload/v1738554533/projects/rn_threads_assets/bi_threads-fill_fswbmb.png)
 
-# React native threads menu
+# React Native Threads Components
 
 This is a menu component inspired by the Threads app, built with React Native. It works seamlessly on both Android and iOS, providing smooth and intuitive gesture-driven interactions.
 
