@@ -2,7 +2,7 @@
 
 # React Native Threads Components
 
-This is a menu component inspired by the Threads app, built with React Native. It works seamlessly on both Android and iOS, providing smooth and intuitive gesture-driven interactions.
+This repository contains React Native components replicating the UI of the Threads app. It serves as a resource for developers looking to implement Threads-like designs in their React Native projects. The components are designed for reusability and compatibility with both Expo
 
 ![Watch the video](https://res.cloudinary.com/whil/image/upload/v1738554163/projects/rn_threads_assets/kk-ezgif.com-video-to-gif-converter_x4myvo.gif)
 
